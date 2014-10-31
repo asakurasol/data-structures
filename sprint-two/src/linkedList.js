@@ -4,9 +4,9 @@ var makeLinkedList = function(){
   list.head = null;
   list.tail = null;
 
-  list.addToTail = function(value){
+  list.addToTail = function(value, key){
     id++;
-    list[id] = makeNode(value);
+    list[id] = makeNode(value, key);
 
     if (list.head === null) {
       list.head = list[id];
@@ -22,6 +22,7 @@ var makeLinkedList = function(){
   list.removeHead = function(){
     var newHead = list.head.next;
     var oldValue = list.head.value;
+
     delete list.head;
     list.head = newHead;
     return oldValue;
@@ -39,14 +40,28 @@ var makeLinkedList = function(){
     };
     return recurse(list.head);
   };
+  //hash helper function
+  list.getNode = function(k){
+    var recurse = function(node){
+      if(node.key === k){
+        return node;
+      } else if (node.next === null){
+        return null;
+      } else {
+        return recurse(node.next);
+      }
+    };
+    return recurse(list.head);
+  }
 
   return list;
 };
 
-var makeNode = function(value){
+var makeNode = function(value, key){
   var node = {};
 
   node.value = value;
+  node.key = key;
   node.next = null;
 
   return node;
