@@ -7,9 +7,6 @@ var makeTree = function(value){
   return newTree;
 };
 
-
-
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
