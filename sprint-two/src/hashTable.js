@@ -50,14 +50,13 @@ HashTable.prototype.checkLimit = function() {
 HashTable.prototype.doubleUp = function() {
   this._limit = this._limit * 2;
   this._doubleStorage = makeLimitedArray(this._limit);
-  //this._doubleStorage = _.defaults(this._doubleStorage, this._storage);
+
   this._storage = this._doubleStorage;
 };
 
 HashTable.prototype.half = function() {
   this._limit = this._limit/2;
   this._halfStorage = makeLimitedArray(this._limit);
-  this._halfStorage = _.defaults(this._halfStorage, this._storage);
   this._storage = this._halfStorage;
 };
 
