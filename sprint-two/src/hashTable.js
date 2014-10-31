@@ -4,10 +4,8 @@ var HashTable = function(){
 };
 
 HashTable.prototype.insert = function(k, v){
-  console.log(this.checkLimit());
-  if (this.checkLimit() >= this._limit/2+1) {
-    this.doubleUp();
-    console.log()
+  if (this.checkLimit()+1 >= (this._limit * 0.75)) {
+    this.scale(true);
   }
 
   var i = getIndexBelowMaxForKey(k, this._limit);
@@ -27,11 +25,11 @@ HashTable.prototype.retrieve = function(k){
 };
 
 HashTable.prototype.remove = function(k){
-  console.log(this.checkLimit());
-  if(this.checkLimit() <= this._limit/2-1){
-    this.half();
+  if(this.checkLimit()-1 <= (this._limit * 0.25)){
+    this.scale(false);
   }
   var i = getIndexBelowMaxForKey(k, this._limit);
+  // fix null bug
   return this._storage.set(i, null);
 };
 
@@ -39,7 +37,7 @@ HashTable.prototype.checkLimit = function() {
   var size = 0;
 
   this._storage.each(function(item) {
-    if(item !== undefined) {
+    if(item) {
       size++;
     }
   });
@@ -47,21 +45,32 @@ HashTable.prototype.checkLimit = function() {
   return size;
 };
 
-HashTable.prototype.doubleUp = function() {
-  this._limit = this._limit * 2;
-  this._doubleStorage = makeLimitedArray(this._limit);
+HashTable.prototype.scale = function(bool) {
+  var self = this;
+  var oldStorage = self._storage;
+  if (bool) {
+    self._limit = self._limit * 2;
+  } else {
+    self._limit = self._limit / 2;
+  }
 
-  this._storage = this._doubleStorage;
+  self._doubleStorage = makeLimitedArray(self._limit);
+
+  self._storage = self._doubleStorage;
+
+  oldStorage.each(function(item, index, storage) {
+    if (item) {
+      item.each(function(node) {
+        self.insert(node.key, node.value);
+      });
+    }
+  });
+
 };
-
-HashTable.prototype.half = function() {
-  this._limit = this._limit/2;
-  this._halfStorage = makeLimitedArray(this._limit);
-  this._storage = this._halfStorage;
-};
-
-
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+// Hashtable.prototype.insert(): O(n)
+// Hashtable.prototype.retrieve(): O(1)
+// Hashtable.prototype.remove(): O(n)

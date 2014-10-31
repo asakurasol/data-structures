@@ -54,8 +54,20 @@ var makeLinkedList = function(){
     return recurse(list.head);
   }
 
+  list.each = function(callback) {
+    var recurse = function(node) {
+      callback(node);
+      if (node.next) {
+        recurse(node.next);
+      }
+    };
+    recurse(list.head);
+  };
+
   return list;
 };
+
+
 
 var makeNode = function(value, key){
   var node = {};
