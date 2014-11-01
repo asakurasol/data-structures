@@ -32,32 +32,20 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-  function cleanEdge(node) {
-
-  }
-
   if (this.getEdge(fromNode, toNode)) {
     delete this.nodeStorage[fromNode][toNode];
     delete this.nodeStorage[toNode][fromNode];
 
-    if (Object.keys(this.nodeStorage[fromNode]).length ===0) {
+    if (Object.keys(this.nodeStorage[fromNode]).length === 0) {
       delete this.nodeStorage[fromNode];
     }
 
-    if (Object.keys(this.nodeStorage[toNode]).length ===0) {
+    if (Object.keys(this.nodeStorage[toNode]).length === 0) {
       delete this.nodeStorage[toNode];
     }
   }
-
 };
 
-// Graph.prototype.forEachNode = function(callback) {
-//   for(var key in this.nodeStorage) {
-//     if(this.nodeStorage.hasOwnProperty(key)) {
-//       if (this.nodeStorage[key])
-//     }
-//   }
-// };
 /*
  * Complexity: What is the time complexity of the above functions?
  */
