@@ -18,7 +18,6 @@ var makeLinkedList = function(){
     }
 
     list.tail = list[id];
-    console.log(list);
   };
 
   list.addToHead = function(value,key) {
