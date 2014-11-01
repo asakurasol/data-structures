@@ -49,7 +49,7 @@ var getIndexBelowMaxForKey = function(str, max){
   }
   return hash % max;
 };
-
+// Helper Hash Functions for BloomFilter
 var hashFuncTwo = function(str, max){
   var hash = 0;
   for (var i = 0; i < str.length; i++) {

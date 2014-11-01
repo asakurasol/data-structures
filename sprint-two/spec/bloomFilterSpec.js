@@ -25,5 +25,4 @@ describe('bloomFilter', function(){
     expect(bloomFilter.get('puppies')).to.be.true;
   });
 
-
 })
