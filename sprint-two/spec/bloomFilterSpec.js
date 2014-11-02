@@ -2,7 +2,7 @@ describe('bloomFilter', function(){
   var bloomFilter;
 
   beforeEach(function(){
-    bloomFilter = new BloomFilter(18);
+    bloomFilter = new BloomFilter(5000);
   });
 
   it('should be an instance of BloomFilter', function() {
