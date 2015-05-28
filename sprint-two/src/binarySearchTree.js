@@ -83,6 +83,33 @@ MakeBinarySearchTree.prototype.isBalanced = function() {
   return false;
 };
 
+//Given a sorted array, figure out algorithm to best fit it in a binarySearchTree
+
+var sortedArray = [1,2,3,4,5,10,20]
+
+//find mid point of array -> floor(length of array / 2)
+//insert mid point
+
+//do the same for array to the left and right
+
+function balancedInsert(array, tree){
+  var midPoint = Math.floor(array.length/2);
+  var left = array.slice(0, midPoint);
+  var right = array.slice(midPoint+1);
+  if(array.length === 0) {
+    return;
+  }
+  if(!tree){
+    tree = new MakeBinarySearchTree(array[midPoint])
+  } else {
+    tree.insert(array[midPoint])
+  }
+  balancedInsert(left, tree);
+  balancedInsert(right, tree);
+  return tree;
+}
+
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
