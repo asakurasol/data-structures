@@ -77,7 +77,7 @@ MakeBinarySearchTree.prototype.maxLength = function(node) {
 };
 
 MakeBinarySearchTree.prototype.isBalanced = function() {
-  if(Math.abs(this.maxLength()-this.minLength()) <= 1){
+  if(Math.abs(this.maxLength() - this.minLength()) <= 1){
     return true;
   }
   return false;
