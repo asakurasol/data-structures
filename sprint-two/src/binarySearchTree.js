@@ -109,6 +109,28 @@ function balancedInsert(array, tree){
   return tree;
 }
 
+//return an array of arrays for each depth
+
+//input 2,1,3,0 as a tree
+
+function depthInsert(node, array, level){
+  level = level || 0;
+  array = array || [];
+  if(!array[level]){
+    array[level] = [node]
+  } else {
+    array[level].push(node)
+  }
+
+  if(node.left){
+    depthInsert(node.left, array, level+1)
+  }
+  if(node.right){
+    depthInsert(node.right, array, level+1)
+  }
+  return array;
+}
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
