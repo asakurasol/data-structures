@@ -56,6 +56,33 @@ MakeBinarySearchTree.prototype.depthFirstLog = function(callback) {
 
 };
 
+MakeBinarySearchTree.prototype.minLength = function(node) {
+  if(node === undefined){
+    node = this;
+  }
+  if(node === null){
+    return 0;
+  }
+  return 1 + Math.min(this.minLength(node.left),this.minLength(node.right));
+};
+
+MakeBinarySearchTree.prototype.maxLength = function(node) {
+  if(node === undefined){
+    node = this;
+  }
+  if(node === null){
+    return 0;
+  }
+  return 1 + Math.max(this.maxLength(node.left),this.maxLength(node.right));
+};
+
+MakeBinarySearchTree.prototype.isBalanced = function() {
+  if(Math.abs(this.maxLength()-this.minLength()) <= 1){
+    return true;
+  }
+  return false;
+};
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
